@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# usePopcorn
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**usePopcorn** is a React-based application that allows users to search for movies and rate them using a star rating system. The application leverages the OMDB API to fetch movie data, providing a seamless user experience for discovering and reviewing films.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Components](#components)
+  - [StarRating](#starrating)
+  - [Custom Hooks](#custom-hooks)
+    - [useKey](#usekey)
+    - [useLocalStorageState](#uselocalstoragestate)
+    - [useMovies](#usemovies)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Movie Search:** Users can search for movies by title, retrieving a list of matching films from the OMDB API.
+- **Star Rating System:** Users can rate movies using a customizable star rating component.
+- **Persistent State:** User ratings are saved in local storage, allowing for a consistent experience across sessions.
+- **Keyboard Navigation:** Users can navigate and select ratings using keyboard shortcuts.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+To get started with the usePopcorn project, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
 
-### `npm run build`
+   ```bash
+   git clone https://github.com/yourusername/usePopcorn.git
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Navigate to the project directory:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   cd usePopcorn
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install the required dependencies:
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Start the development server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   npm start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. Open your browser and navigate to `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
 
-## Learn More
+1. Enter a movie title in the search bar.
+2. Select a movie from the search results.
+3. Rate the movie using the star rating system.
+4. Your rating will be saved automatically and persist across sessions.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Project Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Here’s an overview of the project structure:
 
-### Code Splitting
+```
+usePopcorn/
+├── public/
+│   ├── index.html           # Main HTML file
+│   └── favicon.ico          # Application icon
+├── src/
+│   ├── components/          # Reusable components
+│   │   ├── StarRating.js    # Star rating component
+│   │   └── ...              # Other components
+│   ├── hooks/               # Custom hooks
+│   │   ├── useKey.js        # Key press listener hook
+│   │   ├── useLocalStorageState.js # Local storage state hook
+│   │   └── useMovies.js     # Movie fetching hook
+│   ├── App.js               # Main application component
+│   ├── index.js             # Application entry point
+│   └── styles/              # CSS styles
+│       └── ...              # Other styles
+├── package.json              # Project metadata and dependencies
+└── README.md                 # Project documentation
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Components
 
-### Analyzing the Bundle Size
+### StarRating
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The `StarRating` component provides a visual representation of the movie rating system. It allows users to select a rating by clicking on stars and displays messages based on the rating.
 
-### Making a Progressive Web App
+#### Props
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `maxRating` (number): The maximum rating a user can give (default: 5).
+- `defaultRating` (number): The initial rating (default: 0).
+- `color` (string): The color of the stars (default: `#fcc419`).
+- `size` (number): The size of the stars in pixels (default: 48).
+- `messages` (array): An array of messages corresponding to each rating.
+- `className` (string): Additional CSS classes for styling.
+- `onSetRating` (function): A callback function triggered when the rating is set.
 
-### Advanced Configuration
+### Custom Hooks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### useKey
 
-### Deployment
+This custom hook allows components to listen for keypress events and execute a specified action.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Usage:**
 
-### `npm run build` fails to minify
+```javascript
+useKey('Enter', () => {
+  console.log('Enter key pressed');
+});
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### useLocalStorageState
+
+This hook manages state with local storage, allowing the application to persist state even after a page refresh.
+
+**Usage:**
+
+```javascript
+const [rating, setRating] = useLocalStorageState(0, 'movieRating');
+```
+
+#### useMovies
+
+This hook fetches movie data from the OMDB API based on a search query, handling loading states and errors.
+
+**Usage:**
+
+```javascript
+const { movies, isLoading, error } = useMovies(searchQuery);
+```
