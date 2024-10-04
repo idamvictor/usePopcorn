@@ -10,6 +10,28 @@
   --color-red-dark: #e03131;
 }
 
+/* For Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #202020; /* Background of scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #5a5a5a; /* Color of the scrollbar handle */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #737373; /* Color when hovered */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #5a5a5a #202020; /* Handle and background */
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -56,8 +78,7 @@ body {
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  /* overflow: scroll; */
-  overflow: hidden;
+  overflow: scroll;
   position: relative;
 }
 
